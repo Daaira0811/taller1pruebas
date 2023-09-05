@@ -1,6 +1,12 @@
 # Taller 1 - Pruebas de software
 
-Description here
+The software is focused on the web scraping of the web page "Portal Inmobiliario", which provides the description of the diferent houses published in the website
+
+### Team colaborators
+
+Daira Tamara Acuña Carilao
+
+Tomás Vicente Ignacio Valdés Bustamante
 
 ### Install libraries
 
