@@ -1,6 +1,5 @@
 import axios from "axios";
 import { load } from "cheerio";
-import fs from "fs";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import filterByPrice from "./filter-by-price.js";
@@ -65,7 +64,7 @@ async function getHousesFromHtml() {
  * The function getOriginalPrice() get the original price of the house
  * @param {*} htmlFile 
  * @param {*} section 
- * @returns 
+ * @returns {number} The original price of the house
  */
 function getOriginalPrice(htmlFile, section){
     const originalPrice = Number(
@@ -82,7 +81,7 @@ return originalPrice
  * The function getInUFFromHtmlFile() get the original price of the house
  * @param {*} htmlFile 
  * @param {*} section 
- * @returns 
+ * @returns {Boolean}  If the price is in UF or not
  */
 function getInUFFromHtmlFile(htmlFile, section) {
 	const inUF =
@@ -94,7 +93,7 @@ function getInUFFromHtmlFile(htmlFile, section) {
  * The function sizeFromHtmlFile() get the size of the house
  * @param {*} htmlFile 
  * @param {*} section 
- * @returns 
+ * @returns {string} Return the size of the house
  */
 function sizeFromHtmlFile(htmlFile,section) {
 	const size = htmlFile(section)
@@ -108,7 +107,7 @@ function sizeFromHtmlFile(htmlFile,section) {
  * The function getDormsFromHtmlFile() get the dorms of the house
  * @param {*} htmlFile 
  * @param {*} section 
- * @returns 
+ * @returns {string} Returns the dorms of the house
  */
 function getDormsFromHtmlFile(htmlFile,section) {
 	const dorms = htmlFile(section)
@@ -122,7 +121,7 @@ function getDormsFromHtmlFile(htmlFile,section) {
  * The function getLocationFromtHtmlFile() get the location of the house
  * @param {*} htmlFile 
  * @param {*} section 
- * @returns 
+ * @returns {string} Return the location of the house
  */
 function getLocationFromtHtmlFile(htmlFile,section) {
 	const location =  htmlFile(section)
@@ -153,6 +152,7 @@ getHousesFromHtml().then(async () => {
 		};
 	});
 
+	//Write the file json whith the data of the houses in Temuco in the folder json
 	JsonWriter(city, housesWithPriceInCLP)
 	
 
