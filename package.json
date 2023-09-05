@@ -1,0 +1,19 @@
+{
+	"name": "taller1-pruebas-de-software",
+	"version": "1.0.0",
+	"description": "",
+	"main": "script.js",
+	"type": "module",
+	"scripts": {
+		"start": "node src/script.js"
+	},
+	"keywords": [],
+	"author": "JS",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^1.5.0",
+		"cheerio": "^1.0.0-rc.12",
+		"xlsx": "^0.18.5",
+		"yargs": "^17.7.2"
+	}
+}
