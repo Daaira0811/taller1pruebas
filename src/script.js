@@ -31,8 +31,11 @@ async function getHtmlFromPage() {
 		return htmlFile;
 }
 
-
-async function getHousesFromWeb() {
+/**
+ * The function getHousesFromHtml() get the houses from the HTML code of the webpage
+ * @returns {Promise} The page number
+ */
+async function getHousesFromHtml() {
 	console.log(`Page ${page + 1} of ${MAX_pages}`);
    
 	const htmlFile = await getHtmlFromPage();
@@ -55,10 +58,15 @@ async function getHousesFromWeb() {
 
 	await sleep(1000);
 
-	return page === MAX_pages ? page : getHousesFromWeb();
+	return page === MAX_pages ? page : getHousesFromHtml();
 }
 
-
+/**
+ * The function getOriginalPrice() get the original price of the house
+ * @param {*} htmlFile 
+ * @param {*} section 
+ * @returns 
+ */
 function getOriginalPrice(htmlFile, section){
     const originalPrice = Number(
     htmlFile(section)
@@ -70,12 +78,24 @@ function getOriginalPrice(htmlFile, section){
 return originalPrice
 }
 
+/**
+ * The function getInUFFromHtmlFile() get the original price of the house
+ * @param {*} htmlFile 
+ * @param {*} section 
+ * @returns 
+ */
 function getInUFFromHtmlFile(htmlFile, section) {
 	const inUF =
 	htmlFile(section).find(".andes-money-amount__currency-symbol").text() === "UF";
 	return inUF;
 }
 
+/**
+ * The function sizeFromHtmlFile() get the size of the house
+ * @param {*} htmlFile 
+ * @param {*} section 
+ * @returns 
+ */
 function sizeFromHtmlFile(htmlFile,section) {
 	const size = htmlFile(section)
 	.find(".ui-search-card-attributes__attribute")
@@ -84,6 +104,12 @@ function sizeFromHtmlFile(htmlFile,section) {
 	return size;
 }
 
+/**
+ * The function getDormsFromHtmlFile() get the dorms of the house
+ * @param {*} htmlFile 
+ * @param {*} section 
+ * @returns 
+ */
 function getDormsFromHtmlFile(htmlFile,section) {
 	const dorms = htmlFile(section)
 	.find(".ui-search-card-attributes__attribute")
@@ -92,6 +118,12 @@ function getDormsFromHtmlFile(htmlFile,section) {
 	return dorms;
 }
 
+/**
+ * The function getLocationFromtHtmlFile() get the location of the house
+ * @param {*} htmlFile 
+ * @param {*} section 
+ * @returns 
+ */
 function getLocationFromtHtmlFile(htmlFile,section) {
 	const location =  htmlFile(section)
 	.children()
@@ -104,8 +136,10 @@ function getLocationFromtHtmlFile(htmlFile,section) {
 	return location;
 }
 
-//Get houses with the method `getHousesFromWeb`, finally, get the price in CLP and generate the JSON file with the extracted data
-getHousesFromWeb().then(async () => {
+/**
+ * Get houses with the method `getHousesFromHtml`, finally, get the price in CLP and generate the JSON file with the extracted data
+ */
+getHousesFromHtml().then(async () => {
 	const { data } = await axios.get("https://mindicador.cl/api");
 	const housesWithPriceInCLP = houses.map((house) => {
 		return {
